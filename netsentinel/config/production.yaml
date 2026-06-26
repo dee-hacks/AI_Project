@@ -1,0 +1,18 @@
+# Production overrides for NetSentinel
+server:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 8
+  reload: false
+  log_level: "warning"
+
+mongodb:
+  uri: "${MONGODB_URI}"
+
+redis:
+  host: "${REDIS_HOST}"
+  port: 6379
+
+kafka:
+  enabled: true
+  bootstrap_servers: "${KAFKA_BOOTSTRAP_SERVERS}"

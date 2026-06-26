@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NetSentinel — Network Anomaly Detection</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <h1>NetSentinel</h1>
+      <span class="subtitle">AI-Powered Network Anomaly Detection</span>
+      <div class="header-stats">
+        <span id="stat-total">0</span> Total Events
+        <span id="stat-critical" class="critical">0</span> Critical
+        <span id="stat-high" class="high">0</span> High
+        <button id="btn-refresh" class="btn-icon" title="Refresh">↻</button>
+      </div>
+    </header>
+
+    <div class="dashboard-grid">
+      <!-- Topology Graph -->
+      <section class="card card-wide" id="topology-section">
+        <h2>Network Topology</h2>
+        <div id="topology-container">
+          <svg id="topology-svg" width="100%" height="400"></svg>
+        </div>
+      </section>
+
+      <!-- Anomaly Timeline -->
+      <section class="card" id="timeline-section">
+        <h2>Anomaly Timeline</h2>
+        <div id="timeline-container">
+          <svg id="timeline-svg" width="100%" height="200"></svg>
+        </div>
+      </section>
+
+      <!-- Dashboard Stats -->
+      <section class="card" id="dashboard-section">
+        <h2>Dashboard</h2>
+        <div id="dashboard-stats">
+          <div class="stat-box">
+            <span class="stat-label">Events (24h)</span>
+            <span class="stat-value" id="dash-total">0</span>
+          </div>
+          <div class="stat-box critical">
+            <span class="stat-label">Active Alerts</span>
+            <span class="stat-value" id="dash-active">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Nodes</span>
+            <span class="stat-value" id="dash-nodes">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Uptime</span>
+            <span class="stat-value" id="dash-uptime">-</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Alert Table -->
+    <section class="card" id="alerts-section">
+      <h2>Recent Alerts</h2>
+      <div class="table-controls">
+        <input type="text" id="filter-severity" placeholder="Filter severity..." />
+        <input type="text" id="filter-ip" placeholder="Filter IP..." />
+      </div>
+      <table id="alert-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Severity</th>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Protocol</th>
+            <th>Score</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="alert-body">
+          <tr><td colspan="7">Loading alerts...</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+-r base.txt
+# Production-specific dependencies (e.g., ASGI server with optimal settings)
+gunicorn>=21.0.0

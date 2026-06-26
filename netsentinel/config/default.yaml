@@ -1,0 +1,64 @@
+# NetSentinel Default Configuration
+# All settings can be overridden via environment variables or production.yaml
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  reload: false
+  log_level: "info"
+
+mongodb:
+  uri: "mongodb://localhost:27017"
+  database: "netsentinel"
+  collections:
+    events: "anomaly_events"
+    topology: "network_topology"
+    config: "app_config"
+
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  pubsub_channel: "alerts"
+
+kafka:
+  enabled: false
+  bootstrap_servers: "localhost:9092"
+  topic: "network-packets"
+  group_id: "netsentinel-processor"
+
+capture:
+  interface: "eth0"
+  bpf_filter: "ip"
+  buffer_size: 256
+  flush_interval_ms: 150
+
+features:
+  sliding_window_sec: 1.0
+  max_flow_cache: 10000
+  input_dim: 128
+
+ai:
+  model_path: "data/models/autoencoder.pt"
+  if_model_path: "data/models/isolation_forest.pkl"
+  threshold_percentile: 99.98
+  ensemble:
+    ae_weight: 0.6
+    if_weight: 0.4
+    threshold: 1.0
+
+topology:
+  scan_interval_sec: 300
+  arp_scan_networks:
+    - "192.168.1.0/24"
+  passive_fingerprint: true
+
+alerts:
+  severity_levels:
+    - low
+    - medium
+    - high
+    - critical
+  high_threshold_multiplier: 2.0
+  critical_threshold_multiplier: 3.0
